@@ -1,6 +1,7 @@
+from os import environ
+
 from flask import Flask, request
 from requests import get
-from os import environ
 
 DEVELOPMENT = environ["FLASK_ENV"] == "development"
 WEBPACK_DEV_SERVER = "http://localhost:3000/"
