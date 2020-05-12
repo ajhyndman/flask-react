@@ -1,3 +1,4 @@
+import json
 from os import environ
 
 from flask import Flask, request
@@ -23,6 +24,11 @@ def proxy(path):
         if name.lower() not in excluded_headers
     }
     return (response.content, response.status_code, headers)
+
+
+@app.route("/api/hello")
+def apiHello():
+    return json.dumps("Andrew")
 
 
 @app.route("/", defaults={"path": "index.html"})
