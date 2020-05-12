@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request
 from requests import get
 from os import environ
 
