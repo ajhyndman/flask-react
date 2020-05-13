@@ -5,7 +5,7 @@ from flask import Flask, request
 from requests import get
 
 DEVELOPMENT = environ["FLASK_ENV"] == "development"
-WEBPACK_DEV_SERVER = "http://localhost:3000/"
+WEBPACK_DEV_SERVER = "http://localhost:3000"
 
 app = Flask(__name__, static_folder=None if DEVELOPMENT else "static")
 
@@ -31,9 +31,9 @@ def apiHello():
     return json.dumps("Andrew")
 
 
-@app.route("/", defaults={"path": "index.html"})
-@app.route("/<path:path>", methods=["GET"])
-def reactApp(path):
+@app.route("/app/", defaults={"path": "index.html"})
+@app.route("/app/<path:path>", methods=["GET"])
+def getApp(path):
     if DEVELOPMENT:
         return proxy(request.path)
     return app.send_static_file(path)
