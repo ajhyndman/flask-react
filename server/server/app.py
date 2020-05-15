@@ -4,7 +4,7 @@ from os import environ
 from flask import Flask, request
 from requests import get
 
-DEVELOPMENT = environ["FLASK_ENV"] == "development"
+IS_DEV = environ["FLASK_ENV"] == "development"
 WEBPACK_DEV_SERVER_HOST = "http://localhost:3000"
 
 app = Flask(__name__)
@@ -34,6 +34,6 @@ def apiHello():
 @app.route("/app/", defaults={"path": "index.html"})
 @app.route("/app/<path:path>", methods=["GET"])
 def getApp(path):
-    if DEVELOPMENT:
+    if IS_DEV:
         return proxy(WEBPACK_DEV_SERVER_HOST, request.path)
     return app.send_static_file(path)
