@@ -32,7 +32,7 @@ def apiHello():
 
 
 @app.route("/app/", defaults={"path": "index.html"})
-@app.route("/app/<path:path>", methods=["GET"])
+@app.route("/app/<path:path>")
 def getApp(path):
     if IS_DEV:
         return proxy(WEBPACK_DEV_SERVER_HOST, request.path)
