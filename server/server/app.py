@@ -5,13 +5,13 @@ from flask import Flask, request
 from requests import get
 
 DEVELOPMENT = environ["FLASK_ENV"] == "development"
-WEBPACK_DEV_SERVER = "http://localhost:3000"
+WEBPACK_DEV_SERVER_HOST = "http://localhost:3000"
 
-app = Flask(__name__, static_folder=None if DEVELOPMENT else "static")
+app = Flask(__name__)
 
 
-def proxy(path):
-    response = get(f"{WEBPACK_DEV_SERVER}{path}")
+def proxy(host, path):
+    response = get(f"{host}{path}")
     excluded_headers = [
         "content-encoding",
         "content-length",
@@ -35,5 +35,5 @@ def apiHello():
 @app.route("/app/<path:path>", methods=["GET"])
 def getApp(path):
     if DEVELOPMENT:
-        return proxy(request.path)
+        return proxy(WEBPACK_DEV_SERVER_HOST, request.path)
     return app.send_static_file(path)
