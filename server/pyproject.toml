@@ -8,7 +8,7 @@ authors = ["Andrew Hyndman <ajhyndman@hotmail.com>"]
 python = "^3.8"
 python-dotenv = "^0.19.2"
 requests = "^2.27.1"
-Flask = "^2.0.2"
+Flask = "^2.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
